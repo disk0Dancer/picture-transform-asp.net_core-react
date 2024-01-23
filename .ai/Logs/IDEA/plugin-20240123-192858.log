@@ -1,0 +1,8 @@
+2024-01-23T14:28:58.875Z [s.AiToolwindowsInitializer.reinitializeToolWindows] INFO AI state ENABLED
+2024-01-23T14:28:58.950Z [ctureModificationListener$Companion.initForProject] INFO ProjectStructureModificationListener is init for project picture-transform-asp.net_core-react
+2024-01-23T14:28:58.966Z [ojectContextInitializer.createInfrastructureFacade] INFO isInfrastructureDebug: false
+2024-01-23T14:28:58.967Z [ojectContextInitializer.createInfrastructureFacade] INFO Use port: 55351
+2024-01-23T14:28:58.978Z [ProjectContextInitializer.initializeProjectContext] INFO Plugin context initialized
+2024-01-23T14:28:58.979Z [itializeManager$initializeAnalyzer$1.invokeSuspend] INFO initializing infrastructure
+2024-01-23T14:28:59.921Z [intellij.services.AiInitializeManager.initializeAI] INFO IntelliJ listens web server on port: 63342
+2024-01-23T14:29:00.355Z [ctionsUtilsKt.updateDaemonCodeAnalyzerForOpenFiles] INFO Update daemon code analyzer

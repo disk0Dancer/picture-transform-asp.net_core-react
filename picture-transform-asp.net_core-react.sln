@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "picture-transform-asp.net_core-react", "picture-transform-asp.net_core-react\picture-transform-asp.net_core-react.csproj", "{25AFD659-0A6B-4C86-9C32-B40D005E3077}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25AFD659-0A6B-4C86-9C32-B40D005E3077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25AFD659-0A6B-4C86-9C32-B40D005E3077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25AFD659-0A6B-4C86-9C32-B40D005E3077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25AFD659-0A6B-4C86-9C32-B40D005E3077}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
