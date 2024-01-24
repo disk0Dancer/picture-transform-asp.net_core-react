@@ -6,7 +6,7 @@ export class Home extends Component {
   render() {
       return (
           <div>
-              <h1><a href="https://docs.google.com/document/d/132GrsnT7IXd9ytf1mtYCl0IbGgvI4IK-/edit?usp=sharing&ouid=116044884281460274193&rtpof=true&sd=true">Тестовое задание: нарезка изображения 1600*1200.</a></h1>
+              <h1><a href="https://shorturl.at/hzRSU">Тестовое задание: нарезка изображения 1600*1200.</a></h1>
               <h3>О приложении:</h3>
               <ul>
                   <li>Backend - ASP.Net Core</li>
@@ -28,12 +28,16 @@ export class Home extends Component {
           <div>
               <table>
                   <tbody>
-                        <tr><th>
-    
-                      </th></tr>
+                      
                   </tbody>
               </table>
           </div>
     );
   }
+
+    async populateWeatherData() {
+        const response = await fetch('api/PictureTransform');
+        const data = await response.json();
+        this.setState({ forecasts: data, loading: false });
+    }
 }

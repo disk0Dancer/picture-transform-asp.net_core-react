@@ -33,7 +33,7 @@ public class PictureTransformController : Controller
 
     private Image AddCoordinates(Image image, int x, int y)
     {
-        float TextPadding = 18f;
+        float textPadding = 18f;
         string text = $"{x},{y}";
         
         var font = SystemFonts.CreateFont("Arial", 14f, FontStyle.Regular);
@@ -47,7 +47,7 @@ public class PictureTransformController : Controller
 
         return image.Clone(ctx => ctx
             .DrawText($"{x},{y}", font, Color.Red, 
-                new PointF(image.Width - rect.Width - TextPadding, image.Height - rect.Height - TextPadding)));
+                new PointF(image.Width - rect.Width - textPadding, image.Height - rect.Height - textPadding)));
     }
 
     [HttpPost]
@@ -100,7 +100,7 @@ public class PictureTransformController : Controller
                             }
                         }
                     }
-                    // Console.WriteLine(fragments.Select(f=>f.Uri).Select(u=>u));
+                    // Console.WriteLine(fragments.Select(f=>f.Uri));
                     return fragments
                         .Select(f=>f.Uri)
                         .ToArray();
