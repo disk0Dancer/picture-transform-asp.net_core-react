@@ -17,9 +17,9 @@ namespace picture_transform_asp.net_core_react.Controllers;
 [Route("api/[controller]")]
 public class PictureTransformController : Controller
 {
-    private readonly ILogger<FormResult> _logger;
+    private readonly ILogger<string> _logger;
 
-    public PictureTransformController(ILogger<FormResult> logger)
+    public PictureTransformController(ILogger<string> logger)
     {
         _logger = logger;
     }
@@ -51,7 +51,7 @@ public class PictureTransformController : Controller
     }
 
     [HttpPost]
-    public IEnumerable<string> GetFragments([FromBody] FormRequest request)//IActionResult
+    public IEnumerable<string> GetFragments([FromBody] FormRequest request)
     { 
         try
         {
@@ -68,7 +68,7 @@ public class PictureTransformController : Controller
                     int fragmentWidth = image.Width / columns;
                     int fragmentHeight = image.Height / rows;
 
-                    List<FormResult> fragments = new List<FormResult>();
+                    List<string> fragments = new List<string>();
 
                     // Создание директории для сохранения фрагментов
                     string directoryPath = Path.Combine("wwwroot", "image-fragments", Guid.NewGuid().ToString());
@@ -89,20 +89,11 @@ public class PictureTransformController : Controller
                                 string fragmentFilePath = Path.Combine(directoryPath, fragmentFileName);
                                 imgCoordinated.SaveAsync(fragmentFilePath, new PngEncoder());
 
-                                fragments.Add(new FormResult
-                                {
-                                    // Row = row,
-                                    // Column = col,
-                                    Uri = $"/image-fragments/{directoryPath}/{fragmentFileName}",
-                                    // X = x,
-                                    // Y = y
-                                });
+                                fragments.Add($"/image-fragments/{directoryPath}/{fragmentFileName}");
                             }
                         }
                     }
-                    // Console.WriteLine(fragments.Select(f=>f.Uri));
                     return fragments
-                        .Select(f=>f.Uri)
                         .ToArray();
                 }
             }
@@ -110,14 +101,8 @@ public class PictureTransformController : Controller
         catch (Exception ex)
         { 
             Console.WriteLine(ex); 
-            // return BadRequest($"Error: {ex.Message}");
             return null;
         }
     }
 
-    // var fragments = GetFragments();
-    // foreach (var f in fragments)
-    // {
-    //     Console.WriteLine(f);
-    // }
 }
