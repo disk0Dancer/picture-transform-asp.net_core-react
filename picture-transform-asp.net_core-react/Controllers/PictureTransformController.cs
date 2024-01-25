@@ -71,7 +71,9 @@ public class PictureTransformController : Controller
                     List<string> fragments = new List<string>();
 
                     // Создание директории для сохранения фрагментов
-                    string directoryPath = Path.Combine("wwwroot", "image-fragments", Guid.NewGuid().ToString());
+                    // string directoryPath = Path.Combine("wwwroot", "image-fragments", Guid.NewGuid().ToString());
+                    string guid = Guid.NewGuid().ToString();
+                    string directoryPath = Path.Combine("ClientApp", "public", "image-fragments", guid);
                     Directory.CreateDirectory(directoryPath);
 
                     for (int row = 0; row < rows; row++) 
@@ -89,7 +91,8 @@ public class PictureTransformController : Controller
                                 string fragmentFilePath = Path.Combine(directoryPath, fragmentFileName);
                                 imgCoordinated.SaveAsync(fragmentFilePath, new PngEncoder());
 
-                                fragments.Add($"/image-fragments/{directoryPath}/{fragmentFileName}");
+                                // fragments.Add($"/{directoryPath}/{fragmentFileName}");
+                                fragments.Add($"/image-fragments/{guid}/{fragmentFileName}");
                             }
                         }
                     }
