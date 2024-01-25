@@ -10,10 +10,8 @@ export class Home extends Component {
 
     static renderList(uri_list) {
         
-        let urls = uri_list.map(uri=>"."+uri);
-        
-        let content = urls.map((url, index)=> 
-                <li><img src={url} alt={`Fragment ${index+1}`} style={{width: 'initial', height: 'initial', padding: '10px'}}/></li>);
+        let content = uri_list.map((url, index)=> 
+                <li><img src={url} alt={`Fragment ${index+1}`} style={{padding: '10px'}}/></li>);
         return (
             <ul style={{listStyleType: 'none'}}>
                 {content}

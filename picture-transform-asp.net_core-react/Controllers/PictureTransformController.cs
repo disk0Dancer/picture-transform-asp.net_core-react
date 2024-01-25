@@ -93,7 +93,7 @@ public class PictureTransformController : Controller
                                 imgCoordinated.SaveAsync(fragmentFilePath, new PngEncoder());
 
                                 // fragments.Add($"/{directoryPath}/{fragmentFileName}");
-                                fragments.Add($"/image-fragments/{guid}/{fragmentFileName}");
+                                fragments.Add($"./image-fragments/{guid}/{fragmentFileName}");
                             }
                         }
                     }
