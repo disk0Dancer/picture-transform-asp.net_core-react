@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -9,20 +8,23 @@ export class Home extends Component {
         this.state = { url_list: []};
     }
 
-    componentDidMount() {
-        this.fragmentsRequest();
-    }
+    // componentDidMount() {
+    //     this.fragmentsRequest();
+    // }
 
 
     static renderTable(url_list) {
+        // let q = url_list.resize()
+        
         return (
             <table className="table" aria-labelledby="tableLabel">
                 <tbody>
                 {/*TODO : create columns and rows*/}
                 
                 {/*{url_list.map(url =>*/}
-                {/*    <tr key={forecast.date}>*/}
-                {/*        <td><img src={url}/></td>*/}
+                {/*    <tr>*/}
+                {/*        <p>{url}</p>*/}
+                {/*        /!*<img src={url} alt={url}/>*!/*/}
                 {/*    </tr>*/}
                 {/*)}*/}
                 </tbody>
@@ -37,30 +39,45 @@ export class Home extends Component {
 
         return (
             <div>
-                <h1><a href="https://shorturl.at/hzRSU">Тестовое задание: нарезка изображения.</a></h1>
+                <h1>Тестовое задание: нарезка изображения.</h1>
                 <h3>О приложении:</h3>
                 <ul>
                     <li>Backend - ASP.Net Core</li>
                     <li>Frontend - React</li>
-                    <li><a href="">Репозиторий проекта на Github</a></li>
+                    <li><a href="https://shorturl.at/hzRSU">Задание</a></li>
+                    <li><a href="https://github.com/gchurakov">Репозиторий проекта на Github</a></li>
                 </ul>
-                <h3>Форма отправки изображения</h3>
-                <h3>Изображение отправлено</h3>
+                <h3>Отправить запрос</h3>
                 <form>
-                    <p>Количество разрезов по вертикали: <input type="text" required/></p>
-                    <p>Количество разрезов по горизонтали: <input type="text" required/></p>
-                    <p>Ссылка на изображение 1600*1200: <input type="text" required/></p>
-                    <button type="submit">Отправить</button>
-                    <button type="button">Очистить</button>
+                    <p>Количество разрезов по вертикали: <input type="text" id="columns" required/></p>
+                    <p>Количество разрезов по горизонтали: <input type="text"  id="rows" required/></p>
+                    <p>Ссылка на изображение: <input type="text"  id="url" required/></p>
+                    <button type="submit"  onClick={Home.onClickfragmentsRequest}>Отправить</button>
+                    <button type="reset">Очистить</button>
                 </form>
+                <p id="request"></p>
+                <p id="responce"></p>
                 {contents}
             </div>
         );
     }
 
-    async fragmentsRequest() {
-        const response = await fetch('api/PictureTransform');
-        const data = await response.json();
-        this.setState({uri_list: data, loading: false});
+    async onClickfragmentsRequest() {
+        this.rows = Number(document.getElementById("rows").textContent);
+        this.columns = Number(document.getElementById("columns").textContent);
+        let url = document.getElementById("url").textContent;
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "Rows": this.rows, "Columns": this.columns, "ImageUrl": url })
+        };
+
+        document.getElementById("request").textContent = requestOptions;
+        
+        await fetch('/api/PictureTransform', requestOptions)
+            .then(response => response.json())
+            .then(data => this.setState({uri_list: data, loading: false}));
+
     }
 }
