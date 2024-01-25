@@ -46,12 +46,13 @@ public class PictureTransformController : Controller
         var rect = TextMeasurer.MeasureSize(text, options);
 
         return image.Clone(ctx => ctx
-            .DrawText($"{x},{y}", font, Color.Red, 
-                new PointF(image.Width - rect.Width - textPadding, image.Height - rect.Height - textPadding)));
+            .DrawText($"{x},{y}", font, Color.Red, new PointF(0, 0)));
+                // new PointF(image.Width - rect.Width - textPadding, image.Height - rect.Height - textPadding)));
     }
 
     [HttpPost]
     public IEnumerable<string> GetFragments([FromBody] FormRequest request)
+    // public IActionResult GetFragments([FromBody] FormRequest request)
     { 
         try
         {
@@ -96,8 +97,8 @@ public class PictureTransformController : Controller
                             }
                         }
                     }
-                    return fragments
-                        .ToArray();
+                    // return Ok(fragments.ToArray());
+                    return fragments.ToArray();
                 }
             }
         }
@@ -105,7 +106,18 @@ public class PictureTransformController : Controller
         { 
             Console.WriteLine(ex); 
             return null;
+            // return BadRequest($"Error: {ex.Message}");
         }
+    }
+
+    
+    [HttpOptions]
+    public IActionResult Options()
+    {
+        Response.Headers.Add("Access-Control-Allow-Origin", "https://127.0.0.1:44432");// TODO chreck IP
+        Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+        return Ok();
     }
 
 }
