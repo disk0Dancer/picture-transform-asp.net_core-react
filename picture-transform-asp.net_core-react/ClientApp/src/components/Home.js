@@ -96,8 +96,8 @@ export class Home extends Component {
 
                 <h3>Отправить запрос</h3>
                 <form onSubmit={this.onClickFragmentsRequest}>
-                    <p>Количество разрезов по вертикали: <input type="text" id="columns" required /></p>
-                    <p>Количество разрезов по горизонтали: <input type="text" id="rows" required /></p>
+                    <p>Количество фрагментов по вертикали: <input type="text" id="columns" required /></p>
+                    <p>Количество фрагментов по горизонтали: <input type="text" id="rows" required /></p>
                     <p>Ссылка на изображение: <input type="text" id="url" required /></p>
                     <button type="submit">Отправить</button>
                     <button type="reset">Очистить</button>
