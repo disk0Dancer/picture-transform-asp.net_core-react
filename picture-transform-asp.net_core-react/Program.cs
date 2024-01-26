@@ -1,4 +1,7 @@
-Directory.Delete(Path.Combine("ClientApp", "public", "image-fragments"),true); 
+if (Directory.Exists(Path.Combine("ClientApp", "public", "image-fragments")))
+{
+    Directory.Delete(Path.Combine("ClientApp", "public", "image-fragments"),true);
+} 
 
 var builder = WebApplication.CreateBuilder(args);
 
