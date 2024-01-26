@@ -1,0 +1,6 @@
+﻿services:
+  picture-transform-asp.net_core-react:
+    image: picture-transform-asp.net_core-react
+    build:
+      context: .
+      dockerfile: picture-transform-asp.net_core-react/ClientApp/node_modules/@surma/rollup-plugin-off-main-thread/Dockerfile

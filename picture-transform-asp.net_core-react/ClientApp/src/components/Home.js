@@ -44,6 +44,7 @@ export class Home extends Component {
             .catch(er => console.log(er), event.preventDefault());
     };
 
+    // TODO add regex + is_num_valid to form
     render() {
         const contents = this.state.loading
             ? <p>Loading...</p>
