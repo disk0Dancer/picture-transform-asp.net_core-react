@@ -60,7 +60,7 @@ export class Home extends Component {
                                 <h3>О приложении:</h3>
                             </td>
                             <td>
-                                <h3>Что из ТЗ выполнено:</h3>
+                                <h3></h3>
                             </td>
                         </tr>
                     </thead>
@@ -71,15 +71,26 @@ export class Home extends Component {
                             <li>Backend - ASP.Net Core</li>
                                     <li>Frontend - React</li>
                                     <li><a href="https://shorturl.at/hzRSU">Задание</a></li>
-                                    <li><a href="https://github.com/gchurakov">Github</a></li>
-                                </ul>
-                            </td>
-                            <td>
+                                    <li><a href="https://github.com/gchurakov/picture-transform-asp.net_core-react">Github</a></li>
+                            </ul>
+                        </td>
+                        <td>
                                 <ul>
-                                    <li> Написано апи на C#</li>
+                                    <li>Бекенд нарезает картинку на необходимое количесто фрагментов</li>
+                                    <li>Бекенд подписывает координаты левоге верхнего угла фрагмента</li>
+                                    <li>Бекенд сохраняет фрагменты в публичной директории клиентского приложения</li>
+                                    <li>При отправке POST-запроса проихсходит отправка OPTIONS для добавления заголовков</li>
+                                    <li>В качестве ответа на POST-запрос приходит список URI для подгрузки фрагментов</li>
+                                    
                                 </ul>
                             </td>
-                        </tr>
+                        <td>
+                            <ul>
+                                <li>Фронтенд отрисовывает форму, по нажати кнопки отправляет POST</li>
+                                <li>Фронтенд при получении ответа добавляет на страницу список изображений</li>
+                            </ul>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
 
