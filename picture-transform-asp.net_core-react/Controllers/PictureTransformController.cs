@@ -31,7 +31,7 @@ public class PictureTransformController : Controller
                 .Crop(new Rectangle(x, y, width, height)));
     }
 
-    private Image AddCoordinates(Image image, int x, int y)
+    private async void AddCoordinates(Image image, int x, int y)
     {
         float textPadding = 18f;
         string text = $"{x},{y}";
@@ -44,21 +44,18 @@ public class PictureTransformController : Controller
         };
 
         var rect = TextMeasurer.MeasureSize(text, options);
-
-        return image.Clone(ctx => ctx
-            .DrawText($"{x},{y}", font, Color.Red, new PointF(0, 0)));
-                // new PointF(image.Width - rect.Width - textPadding, image.Height - rect.Height - textPadding)));
+        
+        image.Mutate(ctx => ctx.DrawText($"{x},{y}", font, Color.Red, new PointF(0, 0)));
     }
 
     [HttpPost]
-    public IEnumerable<string> GetFragments([FromBody] FormRequest request)
-    // public IActionResult GetFragments([FromBody] FormRequest request)
+    public async Task<IEnumerable<string>> GetFragments([FromBody] FormRequest request)
     { 
         try
         {
-            string imageUrl = request.ImageUrl;//"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBoj_dXYfw9ezqBdH1cPawn1YR6-s-qRCRifowS0c7qQ&s";
-            int rows = request.Rows;//3;
-            int columns = request.Columns;//2;
+            string imageUrl = request.ImageUrl;
+            int rows = request.Rows;
+            int columns = request.Columns;
               
             using (var webClient = new WebClient())
             { 
@@ -72,7 +69,6 @@ public class PictureTransformController : Controller
                     List<string> fragments = new List<string>();
 
                     // Создание директории для сохранения фрагментов
-                    // string directoryPath = Path.Combine("wwwroot", "image-fragments", Guid.NewGuid().ToString());
                     string guid = Guid.NewGuid().ToString();
                     string directoryPath = Path.Combine("ClientApp", "public", "image-fragments", guid);
                     Directory.CreateDirectory(directoryPath);
@@ -87,17 +83,15 @@ public class PictureTransformController : Controller
                             using (var croppedImage = CropImage(image, x, y, fragmentWidth, fragmentHeight)) 
                             { 
                                 // Сохранение фрагмента в файл
-                                var imgCoordinated = AddCoordinates(croppedImage, x, y);
+                                AddCoordinates(croppedImage, x, y);
                                 string fragmentFileName = $"{row}_{col}.png";
                                 string fragmentFilePath = Path.Combine(directoryPath, fragmentFileName);
-                                imgCoordinated.SaveAsync(fragmentFilePath, new PngEncoder());
+                                croppedImage.SaveAsync(fragmentFilePath, new PngEncoder());
 
-                                // fragments.Add($"/{directoryPath}/{fragmentFileName}");
                                 fragments.Add($"./image-fragments/{guid}/{fragmentFileName}");
                             }
                         }
                     }
-                    // return Ok(fragments.ToArray());
                     return fragments.ToArray();
                 }
             }
@@ -106,7 +100,6 @@ public class PictureTransformController : Controller
         { 
             Console.WriteLine(ex); 
             return null;
-            // return BadRequest($"Error: {ex.Message}");
         }
     }
 
